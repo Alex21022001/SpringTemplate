@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Library</title>
+    <style>
+
+        .product-container {
+            padding: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            height: 40px;
+        }
+        .gradient-button {
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            padding: 8px 7px;
+            margin: 0px 10px;
+            border-radius: 35px;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background-image: linear-gradient(to right, #9EEFE1 0%, #4830F0 51%, #9EEFE1 100%);
+            background-size: 100% auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+            transition: .5s;
+        }
+        .gradient-button:hover {
+            background-position: right center;
+        }
+
+    </style>
+</head>
+<body>
+<h2>List of books</h2>
+<table>
+<div th:each="book:${books}" class="product-container">
+    <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getTitle()+ ', ' +book.getAuthor()}">VALUE</a>
+    <form th:method="GET" th:action="@{/books/edit/{id}(id=${book.getId()})}">
+        <input type="submit" class="edit"  value="edit">
+    </form>
+</div>
+</table>
+<br>
+<hr>
+<form th:method="GET" th:action="@{/books/new}">
+    <label for="create">
+        <h5> Add a new Book</h5>
+    </label>
+    <input type="submit" id="create" class="gradient-button" value="Add">
+</form>
+</body>
+</html>

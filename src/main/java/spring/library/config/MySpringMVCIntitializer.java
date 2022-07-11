@@ -6,7 +6,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
-public class SpringMVCInitilizer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class MySpringMVCIntitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;

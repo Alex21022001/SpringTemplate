@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${person.getName()+' '+person.getSurname()}" ></title>
+    <style>
+        .bold{
+            text-align-all: right;
+            text-shadow: #9EEFE1;
+            background-color: #fff36f;
+            background-position: left;
+        }
+        .bold-green{
+            text-align-all: right;
+            text-shadow: #9EEFE1;
+            background-color: greenyellow;
+            background-position: left;
+        }
+    </style>
+</head>
+<body>
+
+<p class="bold" th:text="${person.getName() + ', ' + person.getSurname()}">VALUE</p>
+<p th:text="${'Year: ' + person.getYear()}">VALUE</p>
+<br>
+<label class="bold" for="list">List of Book which was taken</label>
+<div  th:each="listBooks : ${personListOfBooks}">
+    <p id="list" class="bold-green" th:text="${listBooks.getTitle()+', '+listBooks.getAuthor()}"></p>
+</div>
+<hr>
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete User">
+</form>
+<br>
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Edit User">
+</form>
+
+
+</body>
+</html>

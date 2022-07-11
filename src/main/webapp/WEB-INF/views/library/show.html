@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Book</title>
+<style>
+    body{
+        background: url("hand-drawn-minimal-background/5586989.jpg");
+    }
+    .add-owner{
+        color: #4830F0;
+        height: 30px;
+        font-weight: bold;
+        background-color: #fff36f;
+    }
+    .free-book{
+        color: #07ff14;
+        background-color: black;
+        background-size: auto;
+        size: 22px;
+        font-weight: normal;
+    }
+    .owner{
+        color: black;
+        border-style: double;
+        border-radius: 20px;
+    }
+</style>
+</head>
+<body>
+<label for="name" style="color: darkblue"></label>
+<h3>Name</h3><p id="name" th:text="${book.getTitle()}" >VALUE</p>
+<label for="author" style="color: darkblue"></label>
+<h3>Author</h3><p id="author" th:text="${book.getAuthor()}">VALUE</p>
+<label for="year" style="color: darkblue"></label>
+<h3>Release year</h3><p id="year" th:text="${book.getYear()}">VALUE</p>
+<br/>
+<hr>
+<form th:method="DELETE" id="delete.book" th:action="@{/books/{id}(id=${book.getId()})}" >
+    <input type="submit" class="add-owner" value="Delete Book">
+</form>
+
+
+<div th:if="${people}">
+    <p class="free-book">This book is Free</p>
+    <form th:method="POST" th:action="@{/books/{id}/set(id=${book.getId()})}">
+        <label for="person" >Choose Person:</label>
+        <select th:object="${person}" th:field="*{id}" id="person">
+            <option th:each="per:${people}" th:value="${per.getId()}" th:text="${per.getName()+' '+per.getSurname()}"></option>
+            <input type="submit" class="add-owner" value="Add the Owner">
+        </select>
+    </form>
+</div>
+
+
+<div th:if="${owner}">
+    <p class="owner" id="owner" th:text="${owner.getName()+' '+owner.getSurname()}">VALUE</p>
+    <form th:method="PATCH" id="delete.person" th:action="@{/books/{id}(id=${book.getId()})}" >
+        <input type="submit" class="add-owner" value="Rid the book">
+    </form>
+</div>
+<br/>
+
+
+</body>
+</html>
