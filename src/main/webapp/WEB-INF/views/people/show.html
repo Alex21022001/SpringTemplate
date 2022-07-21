@@ -23,10 +23,30 @@
 <p class="bold" th:text="${person.getName() + ', ' + person.getSurname()}">VALUE</p>
 <p th:text="${'Year: ' + person.getYear()}">VALUE</p>
 <br>
-<label class="bold" for="list">List of Book which was taken</label>
-<div  th:each="listBooks : ${personListOfBooks}">
-    <p id="list" class="bold-green" th:text="${listBooks.getTitle()+', '+listBooks.getAuthor()}"></p>
+
+
+<div th:if="${personbooks}">
+    <div th:each="pb :${personbooks}">
+        <p th:text="${pb.getTitle()} +', '+${pb.getAuthor()} "></p>
+        <form th:method="PATCH"  th:action="@{/people/{id}/set(id=${pb.getId()})}">
+            <input type="submit" class="bold-green" value="Return book">
+        </form>
+    </div>
 </div>
+
+<div th:if="${books}">
+    <form th:method="POST" th:action="@{/people/{id}/set(id=${person.getId()})}">
+        <label for="books">Chose book</label>
+        <select id="books" th:object="${book}" th:field="*{id}">
+            <option th:each="b:${books}" th:value="${b.getId()}" th:text="${b.getTitle()}"></option>
+        </select>
+        <input type="submit" class="add-owner" value="Add Book">
+    </form>
+</div>
+
+
+
+
 <hr>
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
     <input type="submit" value="Delete User">

@@ -44,6 +44,10 @@ public class PersonDAO {
         return jdbcTemplate.query("SELECT * from library WHERE title=?",new Object[]{title},new BeanPropertyRowMapper<>(Book.class)).stream().findAny();
     }
 
+    public Optional<Book> findBooksForPerson(int id) {
+        return jdbcTemplate.query("select l.id,l.title,l.author,l.year,l.person_id from person JOIN library l on person.id = l.person_id where person.id =?",
+                new Object[]{id},new BeanPropertyRowMapper<>(Book.class)).stream().findAny();
+    }
 
-//    insert into person(name, surname, year) VALUES ('Stas','Bondar',2000)
+
 }
