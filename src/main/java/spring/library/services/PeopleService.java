@@ -32,7 +32,7 @@ public class PeopleService {
     }
 
     public Person findById(int id) {
-       return peopleRepository.findById(id).orElse(null);
+        return peopleRepository.findById(id).orElse(null);
     }
 
 
@@ -59,6 +59,7 @@ public class PeopleService {
 
 
     public List<Person> findByName(String name) {
+
         return peopleRepository.findByName(name);
     }
 
