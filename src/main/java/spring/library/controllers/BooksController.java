@@ -5,8 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import spring.library.dao.BookDAO;
-import spring.library.dao.PersonDAO;
 import spring.library.models.Book;
 import spring.library.models.Person;
 import spring.library.services.BooksService;
@@ -20,24 +18,31 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/books")
 public class BooksController {
-    private final BookDAO bookDAO;
-    private final PersonDAO personDAO;
     private final BookValidator bookValidator;
     private final BooksService booksService;
     private final PeopleService peopleService;
 
     @Autowired
-    public BooksController(BookDAO bookDAO, PersonDAO personDAO, BookValidator bookValidator, BooksService booksService, PeopleService peopleService) {
-        this.bookDAO = bookDAO;
-        this.personDAO = personDAO;
+    public BooksController(BookValidator bookValidator, BooksService booksService, PeopleService peopleService) {
         this.bookValidator = bookValidator;
         this.booksService = booksService;
         this.peopleService = peopleService;
     }
 
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("books", booksService.findAll());
+    public String index(Model model,
+                        @RequestParam(name = "page", required = false) Integer page, @RequestParam(name = "books_per_page", required = false) Integer booksPerPage,
+                        @RequestParam(name = "sort_by_year", required = false) boolean sorted ) {
+        if (page == null || booksPerPage == null)
+            model.addAttribute("books", booksService.findAll(sorted));
+        else
+            model.addAttribute("books", booksService.getPageWithParam(page, booksPerPage, sorted));
+
+        return "library/index";
+    }
+    @PatchMapping()
+    public String sortPage(@RequestParam(name = "select")Integer filter,Model model){
+     model.addAttribute("books",booksService.getSortedPage(filter));
         return "library/index";
     }
 
@@ -98,9 +103,22 @@ public class BooksController {
 
     @PostMapping("/{id}/set")
     public String setPerson(@PathVariable int id, @ModelAttribute("person") Person person) {
-        booksService.addOwner(id,person);
+        booksService.addOwner(id, person);
         return "redirect:/books";
 
     }
+
+
+    @GetMapping("/search")
+    public String getSearchPage() {
+        return "library/search";
+    }
+    @PostMapping("/search")
+    public String getResultOfSearching(Model model, @RequestParam(name = "keyword") String keyword) {
+        model.addAttribute("result", booksService.findByNameStartingWith(keyword));
+        return "library/search";
+    }
+
+
 
 }

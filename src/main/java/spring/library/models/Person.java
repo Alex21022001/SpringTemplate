@@ -32,7 +32,7 @@ public class Person {
     @Max(value = 2015, message = "Year should be fewer than 2015")
     private int year;
 
-    @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "owner")
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Book> books;
 

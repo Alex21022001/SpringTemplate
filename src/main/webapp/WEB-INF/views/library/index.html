@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" >
+    <meta charset="UTF-8">
     <title>Library</title>
     <style>
 
@@ -11,6 +11,7 @@
             margin-top: 10px;
             height: 40px;
         }
+
         .gradient-button {
             text-decoration: none;
             display: inline-block;
@@ -26,6 +27,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, .1);
             transition: .5s;
         }
+
         .gradient-button:hover {
             background-position: right center;
         }
@@ -34,13 +36,23 @@
 </head>
 <body>
 <h2>List of books</h2>
+
+<form th:method="PATCH" th:action="@{/books}">
+    <label for="person">Filter:</label>
+    <select name="select" id="person">
+        <option th:value="1">Sort by Name</option>
+        <option th:value="2">Sort by Year</option>
+        <input type="submit" value="apply">
+    </select>
+</form>
+
 <table>
-<div th:each="book:${books}" class="product-container">
-    <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getTitle()+ ', ' +book.getAuthor()}">VALUE</a>
-    <form th:method="GET" th:action="@{/books/edit/{id}(id=${book.getId()})}">
-        <input type="submit" class="edit"  value="edit">
-    </form>
-</div>
+    <div th:each="book:${books}" class="product-container">
+        <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getTitle()+ ', ' +book.getAuthor()}">VALUE</a>
+        <form th:method="GET" th:action="@{/books/edit/{id}(id=${book.getId()})}">
+            <input type="submit" class="edit" value="edit">
+        </form>
+    </div>
 </table>
 <br>
 <hr>

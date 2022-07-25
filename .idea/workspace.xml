@@ -10,8 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7cebaa7e-b279-46e2-91b4-b6974805d6e4" name="Changes" comment="innovate app with JPA and Hibernate">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spring/library/controllers/BooksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spring/library/controllers/BooksController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spring/library/controllers/PeopleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spring/library/controllers/PeopleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spring/library/models/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spring/library/models/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spring/library/repositories/BooksRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spring/library/repositories/BooksRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/spring/library/services/BooksService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spring/library/services/BooksService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/spring/library/services/PeopleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/spring/library/services/PeopleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +28,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -76,7 +84,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/SpringFramework/SpringTemplate",
+    "last_opened_file_path": "D:/Hibernate",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -208,7 +216,7 @@
       <workItem from="1657438300104" duration="6504000" />
       <workItem from="1657520298751" duration="599000" />
       <workItem from="1658579262930" duration="654000" />
-      <workItem from="1658743511139" duration="327000" />
+      <workItem from="1658743511139" duration="17784000" />
     </task>
     <task id="LOCAL-00001" summary="innovate app with JPA and Hibernate">
       <created>1658416436818</created>
@@ -217,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658416436818</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="innovate app with JPA and Hibernate">
+      <created>1658743885987</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1658743885987</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
