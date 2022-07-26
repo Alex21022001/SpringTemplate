@@ -13,6 +13,7 @@ import spring.library.repositories.BooksRepository;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 
@@ -54,6 +55,7 @@ public class BooksService {
     @Transactional
     public void update(Book updatedBook, int id) {
         updatedBook.setId(id);
+        updatedBook.setOwner(booksRepository.findById(id).get().getOwner());
         booksRepository.save(updatedBook);
     }
 
@@ -64,14 +66,16 @@ public class BooksService {
 
     @Transactional
     public void addOwner(int id, Person person) {
-        Session session = entityManager.unwrap(Session.class);
-        session.get(Book.class, id).setOwner(person);
+        Book book = booksRepository.findById(id).orElse(null);
+        book.setOwner(person);
+        book.setTime(new Date());
     }
 
 
     @Transactional
     public void deleteOwner(int id) {
         booksRepository.findById(id).orElse(null).setOwner(null);
+        booksRepository.findById(id).orElse(null).setTime(null);
     }
 
     public List<Book> getPageWithParam(Integer page, Integer booksPerPage, boolean sorted) {
@@ -97,9 +101,9 @@ public class BooksService {
     }
 
     public List<Book> getSortedPage(Integer filter) {
-        if (filter==1) {
+        if (filter == 1) {
             return booksRepository.findAll(Sort.by("title"));
-        } else if (filter==2) {
+        } else if (filter == 2) {
             return booksRepository.findAll(Sort.by("year"));
         }
         return booksRepository.findAll();

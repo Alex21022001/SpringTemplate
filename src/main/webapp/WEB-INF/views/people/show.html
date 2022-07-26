@@ -16,6 +16,9 @@
             background-color: greenyellow;
             background-position: left;
         }
+        .frame{
+            background-color: red;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +30,8 @@
 
 <div th:if="${personbooks}">
     <div th:each="pb :${personbooks}">
-        <p th:text="${pb.getTitle()} +', '+${pb.getAuthor()} "></p>
+        <p th:if="!${pb.isLicense()}" th:text="${pb.getTitle()} +', '+${pb.getAuthor()} "></p>
+        <p th:if="${pb.isLicense()}"class="frame" style="color: white" th:text="${pb.getTitle()} +', '+${pb.getAuthor()} "></p>
         <form th:method="PATCH"  th:action="@{/people/{id}/set(id=${pb.getId()})}">
             <input type="submit" class="bold-green" value="Return book">
         </form>

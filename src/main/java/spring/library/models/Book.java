@@ -1,9 +1,11 @@
 package spring.library.models;
 
 import org.hibernate.annotations.Cascade;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "library")
@@ -28,6 +30,30 @@ public class Book {
     @Max(value = 2022, message = "Year should be fewer than 2022")
     private int year;
 
+
+    @Column(name = "book_take_time")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date time;
+
+    @Transient
+    private boolean license;
+
+    public boolean isLicense() {
+        return license;
+    }
+
+    public void setLicense(boolean license) {
+        this.license = license;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
 
     @ManyToOne
     @JoinColumn(name = "person_id",referencedColumnName = "id")

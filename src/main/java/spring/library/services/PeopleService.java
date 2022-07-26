@@ -11,9 +11,7 @@ import spring.library.repositories.BooksRepository;
 import spring.library.repositories.PeopleRepository;
 
 import javax.persistence.EntityManager;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -43,6 +41,14 @@ public class PeopleService {
         Optional<Person> person = peopleRepository.findById(id);
         if (person.isPresent()) {
             Hibernate.initialize(person.get().getBooks());
+            person.get().getBooks().stream().forEach(book -> {
+                if (book.getTime() == null) {
+                    return;
+                }
+                if ((new Date().getTime() - book.getTime().getTime()) / 86400000 >= 10) {
+                    book.setLicense(true);
+                }
+            });
             return person.get().getBooks();
         } else {
             return Collections.emptyList();

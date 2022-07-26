@@ -5,7 +5,7 @@
     <title>Your Book</title>
 <style>
     body{
-        background: url("hand-drawn-minimal-background/5586989.jpg");
+
     }
     .add-owner{
         color: #4830F0;
@@ -35,6 +35,11 @@
 <label for="year" style="color: darkblue"></label>
 <h3>Release year</h3><p id="year" th:text="${book.getYear()}">VALUE</p>
 <br/>
+
+<form th:method="GET" th:action="@{/books/edit/{id}(id=${book.getId()})}">
+    <input type="submit" value="Edit">
+</form>
+
 <hr>
 <form th:method="DELETE" id="delete.book" th:action="@{/books/{id}(id=${book.getId()})}" >
     <input type="submit" class="add-owner" value="Delete Book">
